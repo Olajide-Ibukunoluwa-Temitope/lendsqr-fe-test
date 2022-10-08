@@ -1,0 +1,77 @@
+@use "src/theme";
+
+@font-face {
+  font-family: "Avenir Next Bold";
+  src: url("../../assets/fonts/AvenirNextLTPro-Bold.otf");
+}
+
+@font-face {
+  font-family: "Avenir Next";
+  src: url("../../assets/fonts/AvenirNextLTPro-Regular.otf");
+}
+
+.login {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  font-family: "Avenir Next", sans-serif;
+  background-color: theme.$white;
+  .side-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .left-side {
+    width: 55%;
+    .logo-container {
+      position: absolute;
+      top: 106px;
+      left: 97px;
+    }
+  }
+  .right-side {
+    width: 45%;
+    background: theme.$white;
+    box-shadow: 0px 15px 90px rgba(0, 0, 0, 0.03);
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-left: 100px;
+
+    .right-side-content {
+      width: 75%;
+      .heading {
+        font-size: 40px;
+        font-weight: 700;
+        line-height: 55px;
+        color: theme.$pry-text-color;
+        font-family: "Avenir Next Bold", sans-serif;
+        margin: 0 0 10px;
+      }
+      .sub-text {
+        font-family: "Avenir Next", sans-serif;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 27px;
+        color: theme.$sec-text-color;
+        margin: 0;
+      }
+      .form-container {
+        margin-top: 60px;
+
+        .forgot-password {
+          font-family: "Avenir Next Bold";
+          font-weight: 600;
+          font-size: 12px;
+          line-height: 16px;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+          color: theme.$sec-color;
+          margin: 0 0 30px;
+        }
+      }
+    }
+  }
+}
