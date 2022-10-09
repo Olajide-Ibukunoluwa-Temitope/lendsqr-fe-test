@@ -22,9 +22,8 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      padding-top: 39px;
       margin-bottom: 42px;
-      padding-left: 30px;
+      padding: 39px 10px 0 30px;
       &-text {
         color: theme.$pry-text-color;
         font-size: 16px;

@@ -10,7 +10,7 @@ const DashboardFrame: React.FC<DashboardFrameProps> = ({ children }) => {
       <NavBar />
       <div className="body">
         <SideBar />
-        <div>{children}</div>
+        <div className="content">{children}</div>
       </div>
     </div>
   );
