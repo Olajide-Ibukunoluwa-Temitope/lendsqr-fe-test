@@ -14,12 +14,12 @@
     background: theme.$white;
     border: 2px solid rgba(84, 95, 125, 0.15);
     border-radius: 5px;
-    padding: 16px;
+    padding-left: 16px;
+    line-height: 19px;
   }
 
   input.textfield::placeholder {
     font-family: "Avenir Next";
-    font-style: normal;
     font-weight: 400;
     font-size: 14px;
     line-height: 19px;

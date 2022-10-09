@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { inputData } from "./data";
 import { formDataType } from "./types";
@@ -18,6 +19,7 @@ const Login: React.FC = () => {
     password: "",
   });
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   // funtions
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -69,7 +71,10 @@ const Login: React.FC = () => {
           <div className="form-container">
             {displayInputFields()}
             <p className="forgot-password">forgot password?</p>
-            <Button />
+            <Button
+              btnText="log in"
+              onClick={() => navigate("/dashboard/customers/users")}
+            />
           </div>
         </div>
       </div>

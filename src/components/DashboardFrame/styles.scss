@@ -1,0 +1,10 @@
+@use "/src/theme";
+
+.dashboard-frame {
+  font-family: "Work Sans", sans-serif;
+  height: 100vh;
+
+  .body {
+    display: flex;
+  }
+}
