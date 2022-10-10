@@ -56,6 +56,20 @@
               cursor: pointer;
             }
           }
+
+          .table-data-item-menu {
+            position: relative;
+            .menu-dropdown {
+              padding: 20px;
+              background: theme.$white;
+              border: 1px solid rgba(84, 95, 125, 0.04);
+              box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+              border-radius: 4px;
+              position: absolute;
+              z-index: 10;
+              top: -18px;
+            }
+          }
         }
       }
     }

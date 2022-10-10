@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import table_item_menu from "../../assets/icons/table_item_menu.svg";
 import left_arrow from "../../assets/icons/left_arrow.svg";
 import right_arrow from "../../assets/icons/right_arrow.svg";
@@ -7,12 +7,16 @@ import "./styles.scss";
 const Table: React.FC = () => {
   const [tableItemCount, setTableItemCount] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [showTableMenu, setShowTableMenu] = useState<boolean>(false);
+  const [activeMenu, setActiveMenu] = useState<number>(0);
   const [pageNumberStep, setPageNumberStep] = useState<{
     [key: string]: number;
   }>({
     initialStep: 0,
     lastStep: 3,
   });
+  const optMenuRef = useRef(null);
+
   const totalItems = 500;
   const pageCount = Math.ceil(totalItems / tableItemCount);
   const pseudoData = new Array(totalItems).fill(0);
@@ -27,6 +31,7 @@ const Table: React.FC = () => {
       updatePages[updatePages.length - 1] < pages[pages.length - 2]) &&
     updatePages[updatePages.length - 1] + 1 !== pages[pages.length - 2];
 
+  //  functions
   const handleTableListCountChange = (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
@@ -68,6 +73,27 @@ const Table: React.FC = () => {
       return num;
     });
   };
+
+  const handleMenuOptionClick = (id: number) => {
+    setShowTableMenu(true);
+    setActiveMenu(id);
+  };
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        optMenuRef.current &&
+        !(optMenuRef.current as any)?.contains(event.target)
+      ) {
+        setShowTableMenu(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [optMenuRef]);
 
   return (
     <div className="table-section">
@@ -150,12 +176,20 @@ const Table: React.FC = () => {
                     index !== data.length - 1 && "border-b"
                   } table-data-item-container`}
                 >
-                  <div className="table-data-item">
+                  <div className="table-data-item table-data-item-menu">
                     <img
                       src={table_item_menu}
                       alt="table item menu"
                       className="table-item-icon"
+                      onClick={() => handleMenuOptionClick(index)}
                     />
+                    {activeMenu == index && showTableMenu && (
+                      <div ref={optMenuRef} className="menu-dropdown">
+                        <div>View</div>
+                        <div>View</div>
+                        <div>View</div>
+                      </div>
+                    )}
                   </div>
                 </td>
               </tr>
