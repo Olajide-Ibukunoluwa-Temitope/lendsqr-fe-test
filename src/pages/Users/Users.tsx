@@ -3,9 +3,12 @@ import all_user from "../../assets/icons/all_user.svg";
 import active_users from "../../assets/icons/active_users.svg";
 import users_with_loans from "../../assets/icons/users_with_loans.svg";
 import users_with_savings from "../../assets/icons/users_with_savings.svg";
+import SummaryCard from "../../components/SummaryCard/SummaryCard";
 import "./styles.scss";
+import Table from "../../components/Table/Table";
 
 const Users: React.FC = () => {
+  // const pseudoData = new Array(8).fill(0);
   const summaryData = [
     {
       icon: all_user,
@@ -37,16 +40,16 @@ const Users: React.FC = () => {
       <div className="summary-details">
         {summaryData.map((value, idx) => {
           return (
-            <div key={idx} className="summary-card">
-              <div className="all-user">
-                <img src={value.icon} alt="all user icon" />
-              </div>
-              <p className="title">{value.title}</p>
-              <p className="count">{value.count}</p>
-            </div>
+            <SummaryCard
+              key={idx}
+              icon={value.icon}
+              title={value.title}
+              count={value.count}
+            />
           );
         })}
       </div>
+      <Table />
     </div>
   );
 };
