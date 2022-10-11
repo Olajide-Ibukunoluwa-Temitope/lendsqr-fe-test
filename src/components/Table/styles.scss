@@ -15,6 +15,7 @@
 
       &-heading-item {
         display: flex;
+        gap: 10px;
         margin-bottom: 13px;
         font-weight: 600;
         font-size: 12px;
@@ -22,6 +23,31 @@
         align-items: flex-end;
         text-transform: uppercase;
         color: theme.$sec-text-color;
+
+        .heading {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          .icon {
+            position: relative;
+            .filter-icon {
+              cursor: pointer;
+            }
+            .filter-dropdown {
+              position: absolute;
+              top: 28px;
+              z-index: 11;
+              left: -155px;
+              width: 270px;
+              padding: 30px 20px;
+              background-color: theme.$white;
+              border: 1px solid rgba(84, 95, 125, 0.14);
+              box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+              border-radius: 4px;
+            }
+          }
+        }
       }
 
       &-data-row {
@@ -60,7 +86,7 @@
           .table-data-item-menu {
             position: relative;
             .menu-dropdown {
-              padding: 20px;
+              padding: 20px 43px 20px 20px;
               background: theme.$white;
               border: 1px solid rgba(84, 95, 125, 0.04);
               box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
@@ -68,6 +94,20 @@
               position: absolute;
               z-index: 10;
               top: -18px;
+              left: -60px;
+
+              .menu-item {
+                font-weight: 500;
+                font-size: 14px;
+                line-height: 16px;
+                color: theme.$sec-text-color;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                white-space: nowrap;
+                cursor: pointer;
+                text-decoration: none;
+              }
             }
           }
         }

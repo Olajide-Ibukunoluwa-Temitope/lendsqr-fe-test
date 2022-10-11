@@ -34,7 +34,7 @@ export const sidebarData: sidebarDataType[] = [
       {
         title: "Users",
         icon: users,
-        link: "#",
+        link: "/dashboard/customers/users",
       },
       {
         title: "Guarantors",

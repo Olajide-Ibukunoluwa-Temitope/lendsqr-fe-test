@@ -28,6 +28,10 @@
   .left-side {
     width: 55%;
 
+    @media screen and (max-width: 900px) {
+      display: none;
+    }
+
     .logo-container {
       position: absolute;
       top: 106px;
@@ -48,8 +52,27 @@
     justify-content: flex-start;
     padding-left: 100px;
 
+    @media screen and (max-width: 900px) {
+      width: 100%;
+      padding: 0 40px;
+    }
+
     .right-side-content {
       width: 75%;
+
+      @media screen and (max-width: 900px) {
+        width: 100%;
+      }
+
+      .logo-container {
+        display: none;
+
+        @media screen and (max-width: 900px) {
+          display: block;
+          top: 100px;
+          position: absolute;
+        }
+      }
 
       .heading {
         font-size: 40px;

@@ -6,16 +6,19 @@ import Login from "./pages/Login/Login";
 import Users from "./pages/Users/Users";
 
 const App: React.FC = () => {
+  const isLoggedIn = false;
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
       </Routes>
-      <DashboardFrame>
-        <Routes>
-          <Route path="/dashboard/customers/users" element={<Users />} />
-        </Routes>
-      </DashboardFrame>
+      {isLoggedIn && (
+        <DashboardFrame>
+          <Routes>
+            <Route path="/dashboard/customers/users" element={<Users />} />
+          </Routes>
+        </DashboardFrame>
+      )}
     </Router>
   );
 };

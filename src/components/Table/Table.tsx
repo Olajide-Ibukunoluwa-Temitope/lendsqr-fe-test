@@ -2,13 +2,22 @@ import React, { useEffect, useRef, useState } from "react";
 import table_item_menu from "../../assets/icons/table_item_menu.svg";
 import left_arrow from "../../assets/icons/left_arrow.svg";
 import right_arrow from "../../assets/icons/right_arrow.svg";
+import view_details from "../../assets/icons/view_details.svg";
+import blacklist_user from "../../assets/icons/blacklist_user.png";
+import activate_user from "../../assets/icons/activate_user.png";
+import filter_icon from "../../assets/icons/filter_icon.svg";
 import "./styles.scss";
+import { tableHeading } from "./data";
+import TextField from "../InputFields/TextField/TextField";
+import SelectField from "../InputFields/SelectField/SelectField";
 
 const Table: React.FC = () => {
   const [tableItemCount, setTableItemCount] = useState<number>(10);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [showTableMenu, setShowTableMenu] = useState<boolean>(false);
   const [activeMenu, setActiveMenu] = useState<number>(0);
+  const [showFilterMenu, setShowFilterMenu] = useState<boolean>(false);
+  const [activeFilterMenu, setActiveFilterMenu] = useState<number>(0);
   const [pageNumberStep, setPageNumberStep] = useState<{
     [key: string]: number;
   }>({
@@ -16,6 +25,7 @@ const Table: React.FC = () => {
     lastStep: 3,
   });
   const optMenuRef = useRef(null);
+  const filterRef = useRef(null);
 
   const totalItems = 500;
   const pageCount = Math.ceil(totalItems / tableItemCount);
@@ -79,13 +89,21 @@ const Table: React.FC = () => {
     setActiveMenu(id);
   };
 
+  const handleFilterClick = (id: number) => {
+    setShowFilterMenu(true);
+    setActiveFilterMenu(id);
+  };
+
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
-        optMenuRef.current &&
-        !(optMenuRef.current as any)?.contains(event.target)
+        (optMenuRef.current &&
+          !(optMenuRef.current as any)?.contains(event.target)) ||
+        (filterRef.current &&
+          !(filterRef.current as any)?.contains(event.target))
       ) {
         setShowTableMenu(false);
+        setShowFilterMenu(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -93,7 +111,7 @@ const Table: React.FC = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, [optMenuRef]);
+  }, [optMenuRef, filterRef]);
 
   return (
     <div className="table-section">
@@ -101,27 +119,87 @@ const Table: React.FC = () => {
         <table className="table">
           <thead className="">
             <tr>
-              <th>
-                <div className="table-heading-item">Organisation</div>
-              </th>
-              <th>
-                <div className="table-heading-item">Username</div>
-              </th>
-              <th>
-                <div className="table-heading-item">Email</div>
-              </th>
-              <th>
-                <div className="table-heading-item">Phone number</div>
-              </th>
-              <th>
-                <div className="table-heading-item">Date joined</div>
-              </th>
-              <th>
-                <div className="table-heading-item">Status</div>
-              </th>
-              <th>
-                <div className="table-heading-item"></div>
-              </th>
+              {tableHeading.map((value, idx) => {
+                return (
+                  <th key={idx}>
+                    <div className="table-heading-item">
+                      <div className="heading">
+                        <p>{value}</p>
+                        <div className="icon">
+                          {value !== "" && (
+                            <img
+                              src={filter_icon}
+                              alt="filter"
+                              className="filter-icon"
+                              onClick={() => handleFilterClick(idx)}
+                            />
+                          )}
+                          {showFilterMenu && activeFilterMenu === idx && (
+                            <div ref={filterRef} className="filter-dropdown">
+                              <SelectField
+                                placeholder="Select"
+                                name="organization"
+                                handleChange={() => console.log("fds")}
+                                borderRadius="8px"
+                                label="organization"
+                                options={[
+                                  { label: "Lendsqr", value: "lendsqr" },
+                                ]}
+                              />
+                              <TextField
+                                type="text"
+                                placeholder="User"
+                                name="username"
+                                borderRadius="8px"
+                                label="Username"
+                                value=""
+                                handleChange={() => console.log("fd")}
+                              />
+                              <TextField
+                                type="text"
+                                placeholder="Email"
+                                label="Email"
+                                name="email"
+                                borderRadius="8px"
+                                value=""
+                                handleChange={() => console.log("fd")}
+                              />
+                              <TextField
+                                type="date"
+                                placeholder="Date"
+                                label="Date"
+                                name="date"
+                                borderRadius="8px"
+                                value=""
+                                handleChange={() => console.log("fd")}
+                              />
+                              <TextField
+                                type="text"
+                                placeholder="Phone Number"
+                                label="Phone Number"
+                                name="phoneNo"
+                                borderRadius="8px"
+                                value=""
+                                handleChange={() => console.log("fd")}
+                              />
+                              <SelectField
+                                placeholder="Select"
+                                name="status"
+                                handleChange={() => console.log("fds")}
+                                borderRadius="8px"
+                                label="status"
+                                options={[
+                                  { label: "Lendsqr", value: "lendsqr" },
+                                ]}
+                              />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </th>
+                );
+              })}
             </tr>
           </thead>
           <tbody>
@@ -183,11 +261,23 @@ const Table: React.FC = () => {
                       className="table-item-icon"
                       onClick={() => handleMenuOptionClick(index)}
                     />
-                    {activeMenu == index && showTableMenu && (
+                    {activeMenu === index && showTableMenu && (
                       <div ref={optMenuRef} className="menu-dropdown">
-                        <div>View</div>
-                        <div>View</div>
-                        <div>View</div>
+                        <a
+                          href={`/dashboard/customers/users/1`}
+                          className="menu-item"
+                        >
+                          <img src={view_details} alt="view details" />
+                          <p>View Details</p>
+                        </a>
+                        <div className="menu-item">
+                          <img src={blacklist_user} alt="blacklist user" />
+                          <p>Blacklist User</p>
+                        </div>
+                        <div className="menu-item">
+                          <img src={activate_user} alt="activate user" />
+                          <p>Activate User</p>
+                        </div>
                       </div>
                     )}
                   </div>

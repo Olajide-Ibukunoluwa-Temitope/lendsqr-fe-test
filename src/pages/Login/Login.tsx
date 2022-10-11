@@ -66,6 +66,9 @@ const Login: React.FC = () => {
       </div>
       <div className="right-side side-container">
         <div className="right-side-content">
+          <div className="logo-container">
+            <img src={logo} alt="logo" />
+          </div>
           <h3 className="heading">Welcome!</h3>
           <p className="sub-text">Enter details to login.</p>
           <div className="form-container">
