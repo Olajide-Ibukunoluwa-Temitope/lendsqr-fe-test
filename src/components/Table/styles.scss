@@ -45,6 +45,11 @@
               border: 1px solid rgba(84, 95, 125, 0.14);
               box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
               border-radius: 4px;
+
+              .filter-buttons {
+                display: flex;
+                gap: 14px;
+              }
             }
           }
         }
@@ -52,6 +57,7 @@
 
       &-data-row {
         width: 100%;
+        cursor: pointer;
 
         .border-b {
           border-bottom: solid 1px rgba(33, 63, 125, 0.1);

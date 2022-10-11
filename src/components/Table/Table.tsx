@@ -10,9 +10,20 @@ import "./styles.scss";
 import { tableHeading } from "./data";
 import TextField from "../InputFields/TextField/TextField";
 import SelectField from "../InputFields/SelectField/SelectField";
+import ButtonAlt from "../Buttons/ButtonAlt/ButtonAlt";
+import Button from "../Buttons/Button/Button";
+import { useNavigate } from "react-router-dom";
+import { TableProps } from "./types";
+import { sliceIntoChunks } from "../../utilities";
 
-const Table: React.FC = () => {
+const Table: React.FC<TableProps> = ({ userData }) => {
   const [tableItemCount, setTableItemCount] = useState<number>(10);
+  const [tableItemData, setTableItemData] = useState<{
+    [key: string]: number;
+  }>({
+    initialIndex: 0,
+    lastIndex: 10,
+  });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [showTableMenu, setShowTableMenu] = useState<boolean>(false);
   const [activeMenu, setActiveMenu] = useState<number>(0);
@@ -26,20 +37,22 @@ const Table: React.FC = () => {
   });
   const optMenuRef = useRef(null);
   const filterRef = useRef(null);
+  const navigate = useNavigate();
 
-  const totalItems = 500;
+  const totalItems = userData.length;
   const pageCount = Math.ceil(totalItems / tableItemCount);
-  const pseudoData = new Array(totalItems).fill(0);
-  const data = pseudoData.slice(0, tableItemCount);
+  const data = userData;
   const pages = [...Array(pageCount)].map((_, idx) => idx + 1);
   const updatePages = pages.slice(
     pageNumberStep.initialStep,
     pageNumberStep.lastStep
   );
+  const splitData = sliceIntoChunks(userData, tableItemCount);
   const showEllipse =
-    (updatePages[updatePages.length - 1] !== pages[pages.length - 2] ||
-      updatePages[updatePages.length - 1] < pages[pages.length - 2]) &&
-    updatePages[updatePages.length - 1] + 1 !== pages[pages.length - 2];
+    updatePages[updatePages.length - 1] !== pages[pages.length - 2] &&
+    updatePages[updatePages.length - 1] < pages[pages.length - 2] &&
+    updatePages[updatePages.length - 1] + 1 !== pages[pages.length - 2] &&
+    updatePages[updatePages.length - 1] !== pages[pages.length - 1];
 
   //  functions
   const handleTableListCountChange = (
@@ -94,6 +107,22 @@ const Table: React.FC = () => {
     setActiveFilterMenu(id);
   };
 
+  // const displayFilterFields = {
+  //   switch (type) {
+  //     case 'select':
+  //       return
+
+  //     default:
+  //       return;
+  //   }
+  // }
+
+  console.log(
+    showEllipse,
+    updatePages[updatePages.length - 1],
+    pages[pages.length - 1],
+    pages[pages.length - 2]
+  );
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -112,6 +141,10 @@ const Table: React.FC = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [optMenuRef, filterRef]);
+
+  if (!userData || userData.length == 0) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <div className="table-section">
@@ -192,6 +225,16 @@ const Table: React.FC = () => {
                                   { label: "Lendsqr", value: "lendsqr" },
                                 ]}
                               />
+                              <div className="filter-buttons">
+                                <ButtonAlt
+                                  btnText="Reset"
+                                  onClick={() => console.log("#")}
+                                />
+                                <Button
+                                  btnText="Filter"
+                                  onClick={() => console.log("#")}
+                                />
+                              </div>
                             </div>
                           )}
                         </div>
@@ -203,46 +246,58 @@ const Table: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {data.map((_, index) => (
-              <tr className="table-data-row w-full" key={index}>
+            {splitData?.[currentPage - 1]?.map((user, index) => (
+              <tr
+                className="table-data-row"
+                onClick={() =>
+                  navigate(`/dashboard/customers/users/${index + 1}`)
+                }
+                key={index}
+              >
                 <td
                   className={`${
-                    index !== data.length - 1 && "border-b"
+                    index !== splitData?.[currentPage - 1].length - 1 &&
+                    "border-b"
                   } table-data-item-container`}
                 >
-                  <div className="table-data-item">Lendsqr</div>
+                  <div className="table-data-item">{user.orgName}</div>
                 </td>
                 <td
                   className={`${
-                    index !== data.length - 1 && "border-b"
+                    index !== splitData?.[currentPage - 1].length - 1 &&
+                    "border-b"
                   } table-data-item-container`}
                 >
-                  <div className="table-data-item">Adedeji</div>
+                  <div className="table-data-item">{user.userName}</div>
                 </td>
                 <td
                   className={`${
-                    index !== data.length - 1 && "border-b"
+                    index !== splitData?.[currentPage - 1].length - 1 &&
+                    "border-b"
                   } table-data-item-container`}
                 >
-                  <div className="table-data-item">adedeji@lendsqr.com</div>
+                  <div className="table-data-item">{user.email}</div>
                 </td>
                 <td
                   className={`${
-                    index !== data.length - 1 && "border-b"
+                    index !== splitData?.[currentPage - 1].length - 1 &&
+                    "border-b"
                   } table-data-item-container`}
                 >
-                  <div className="table-data-item">08078903721</div>
+                  <div className="table-data-item">{user.phoneNumber}</div>
                 </td>
                 <td
                   className={`${
-                    index !== data.length - 1 && "border-b"
+                    index !== splitData?.[currentPage - 1].length - 1 &&
+                    "border-b"
                   } table-data-item-container`}
                 >
-                  <div className="table-data-item">May 15, 2020 10:00 AM</div>
+                  <div className="table-data-item">{user.createdAt}</div>
                 </td>
                 <td
                   className={`${
-                    index !== data.length - 1 && "border-b"
+                    index !== splitData?.[currentPage - 1].length - 1 &&
+                    "border-b"
                   } table-data-item-container`}
                 >
                   <div className="table-data-item">
@@ -251,7 +306,8 @@ const Table: React.FC = () => {
                 </td>
                 <td
                   className={`${
-                    index !== data.length - 1 && "border-b"
+                    index !== splitData?.[currentPage - 1].length - 1 &&
+                    "border-b"
                   } table-data-item-container`}
                 >
                   <div className="table-data-item table-data-item-menu">
@@ -317,15 +373,19 @@ const Table: React.FC = () => {
                 {" "}
                 {updatePages.map((page, idx) => {
                   return (
-                    <span
-                      key={idx}
-                      className={`pagination-number-item ${
-                        page === currentPage && "pagination-number-item-active"
-                      }`}
-                      onClick={() => handlePageNumberClick(page)}
-                    >
-                      {page}
-                    </span>
+                    pages[pages.length - 1] !==
+                      updatePages[updatePages.length - 1] && (
+                      <span
+                        key={idx}
+                        className={`pagination-number-item ${
+                          page === currentPage &&
+                          "pagination-number-item-active"
+                        }`}
+                        onClick={() => handlePageNumberClick(page)}
+                      >
+                        {page}
+                      </span>
+                    )
                   );
                 })}
                 {showEllipse && (

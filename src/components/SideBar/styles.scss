@@ -67,6 +67,12 @@
         opacity: 0.6;
       }
     }
+
+    .active {
+      background-color: rgba(57, 205, 204, 0.06);
+      border-left: solid 3px theme.$sec-color;
+      padding-left: 27px;
+    }
   }
 
   .sidebar-footer {
@@ -85,7 +91,6 @@
       &:hover {
         background-color: rgba(57, 205, 204, 0.06);
         border-left: solid 3px theme.$sec-color;
-        // margin-left: -30px;
         padding-left: 27px;
       }
     }
