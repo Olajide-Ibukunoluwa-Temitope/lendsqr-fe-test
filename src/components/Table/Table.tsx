@@ -117,12 +117,7 @@ const Table: React.FC<TableProps> = ({ userData }) => {
   //   }
   // }
 
-  console.log(
-    showEllipse,
-    updatePages[updatePages.length - 1],
-    pages[pages.length - 1],
-    pages[pages.length - 2]
-  );
+  console.log(showTableMenu, activeMenu);
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -228,6 +223,7 @@ const Table: React.FC<TableProps> = ({ userData }) => {
                               <div className="filter-buttons">
                                 <ButtonAlt
                                   btnText="Reset"
+                                  color="#545F7D"
                                   onClick={() => console.log("#")}
                                 />
                                 <Button
@@ -247,13 +243,7 @@ const Table: React.FC<TableProps> = ({ userData }) => {
           </thead>
           <tbody>
             {splitData?.[currentPage - 1]?.map((user, index) => (
-              <tr
-                className="table-data-row"
-                onClick={() =>
-                  navigate(`/dashboard/customers/users/${index + 1}`)
-                }
-                key={index}
-              >
+              <tr className="table-data-row" key={index}>
                 <td
                   className={`${
                     index !== splitData?.[currentPage - 1].length - 1 &&
@@ -320,7 +310,7 @@ const Table: React.FC<TableProps> = ({ userData }) => {
                     {activeMenu === index && showTableMenu && (
                       <div ref={optMenuRef} className="menu-dropdown">
                         <a
-                          href={`/dashboard/customers/users/1`}
+                          href={`/dashboard/customers/users/${index + 1}`}
                           className="menu-item"
                         >
                           <img src={view_details} alt="view details" />

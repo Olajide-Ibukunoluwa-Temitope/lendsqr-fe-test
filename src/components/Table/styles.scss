@@ -27,6 +27,8 @@
         .heading {
           display: flex;
           align-items: center;
+          padding-right: 12px;
+          white-space: nowrap;
           gap: 10px;
 
           .icon {
@@ -71,6 +73,7 @@
             color: theme.$sec-text-color;
             margin-bottom: 23px;
             margin-top: 23px;
+            padding-right: 12px;
 
             .status {
               font-weight: 400;
