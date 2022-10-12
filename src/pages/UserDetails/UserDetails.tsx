@@ -1,18 +1,22 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ButtonAlt from "../../components/Buttons/ButtonAlt/ButtonAlt";
 import DashboardFrame from "../../components/DashboardFrame/DashboardFrame";
 import back_arrow from "../../assets/icons/back_arrow.svg";
+import filled_star from "../../assets/icons/filled_star.svg";
+import empty_star from "../../assets/icons/empty_star.svg";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./styles.scss";
+import { tabsData } from "./data";
 
 const UserDetails: React.FC = () => {
   const [userDetails, setUserDetails] = useState<{ [key: string]: any } | null>(
     null
   );
+  const [activeTab, setActiveTab] = useState<number>(0);
   const navigate = useNavigate();
   const location = useLocation();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const isLoggedIn = sessionStorage.getItem("isLoggedIn");
     if (!isLoggedIn) return navigate("/");
     if (!userDetails) {
@@ -20,11 +24,11 @@ const UserDetails: React.FC = () => {
       const parsedUsers = stringifiedUsers ? JSON.parse(stringifiedUsers) : [];
       const id = location.pathname.split("/").slice(-1)[0];
       const userInfo = parsedUsers.find(
-        (item: { [key: string]: any }) => item?.id == id
+        (item: { [key: string]: any }) => item?.id === id
       );
       setUserDetails(userInfo);
     }
-  }, []);
+  }, [location.pathname, navigate, userDetails]);
 
   console.log("userDetails", userDetails);
   return (
@@ -68,16 +72,38 @@ const UserDetails: React.FC = () => {
                 <p className="sub-name-text">LSQFf587g90</p>
               </div>
             </div>
-            <div>
-              <div>User’s Tier</div>
-              <div></div>
+            <div className="user-tier">
+              <div className="user-tier-text">User’s Tier</div>
+              <div className="tier-container">
+                <div className="tier">
+                  <img src={filled_star} alt="rating" />
+                  <img src={empty_star} alt="rating" />
+                  <img src={empty_star} alt="rating" />
+                </div>
+              </div>
             </div>
-            <div>
-              <div>₦200,000.00</div>
-              <div>9912345678/Providus Bank</div>
+            <div className="bank-summary-container">
+              <div className="bank-summary">
+                <div className="loan">₦200,000.00</div>
+                <div className="bank">9912345678/Providus Bank</div>
+              </div>
             </div>
           </div>
-          <div></div>
+          <div className="tab">
+            {tabsData.map((item, idx) => {
+              return (
+                <div
+                  key={idx}
+                  onClick={() => setActiveTab(idx)}
+                  className={`tab-item-container ${
+                    activeTab === idx && "active"
+                  }`}
+                >
+                  <p className="tab-item">{item}</p>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </DashboardFrame>

@@ -40,7 +40,6 @@
   }
 
   .user-details-summary-container {
-    width: 100%;
     background: theme.$white;
     border: 1px solid rgba(33, 63, 125, 0.06);
     box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
@@ -49,7 +48,7 @@
 
     .user-details-summary {
       display: flex;
-      margin-bottom: 50px;
+      margin-bottom: 51px;
 
       .avatar-container {
         display: flex;
@@ -83,6 +82,89 @@
             color: theme.$sec-text-color;
           }
         }
+      }
+
+      .user-tier {
+        padding: 0 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-right: solid 1px rgba(84, 95, 125, 0.2);
+        gap: 11px;
+
+        &-text {
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 16px;
+          color: theme.$sec-text-color;
+        }
+
+        .tier-container {
+          display: flex;
+
+          .tier {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+          }
+        }
+      }
+
+      .bank-summary-container {
+        padding-left: 30px;
+        display: flex;
+        align-items: center;
+
+        .bank-summary {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          .loan {
+            font-weight: 500;
+            font-size: 22px;
+            line-height: 26px;
+            color: theme.$pry-text-color;
+          }
+
+          .bank {
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 14px;
+            color: theme.$pry-text-color;
+          }
+        }
+      }
+    }
+
+    .tab {
+      display: flex;
+      justify-content: space-between;
+
+      .tab-item-container {
+        padding: 0 20px 10px 20px;
+
+        cursor: pointer;
+
+        .tab-item {
+          font-weight: 400;
+          font-size: 16px;
+          line-height: 19px;
+          text-align: center;
+          color: rgba(0, 0, 0, 0.8);
+        }
+      }
+
+      .active {
+        border-bottom: solid 2px theme.$sec-color;
+
+        .tab-item {
+          color: theme.$sec-color;
+        }
+      }
+
+      p {
+        margin: 0;
       }
     }
   }
