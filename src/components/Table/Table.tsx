@@ -51,6 +51,7 @@ const Table: React.FC<TableProps> = ({ userData }) => {
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
     setTableItemCount(Number(e.target.value));
+    setCurrentPage(1);
   };
 
   const handleNextPage = () => {
@@ -99,17 +100,6 @@ const Table: React.FC<TableProps> = ({ userData }) => {
     setActiveFilterMenu(id);
   };
 
-  // const displayFilterFields = {
-  //   switch (type) {
-  //     case 'select':
-  //       return
-
-  //     default:
-  //       return;
-  //   }
-  // }
-
-  console.log(showTableMenu, activeMenu);
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (
@@ -297,12 +287,14 @@ const Table: React.FC<TableProps> = ({ userData }) => {
                   } table-data-item-container`}
                 >
                   <div className="table-data-item table-data-item-menu">
-                    <img
-                      src={table_item_menu}
-                      alt="table item menu"
-                      className="table-item-icon"
-                      onClick={() => handleMenuOptionClick(index)}
-                    />
+                    <div onClick={() => handleMenuOptionClick(index)}>
+                      <img
+                        src={table_item_menu}
+                        alt="table item menu"
+                        className="table-item-icon"
+                      />
+                    </div>
+
                     {activeMenu === index && showTableMenu && (
                       <div ref={optMenuRef} className="menu-dropdown">
                         <a
