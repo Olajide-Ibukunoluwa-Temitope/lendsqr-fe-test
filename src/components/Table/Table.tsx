@@ -144,6 +144,7 @@ const Table: React.FC<TableProps> = ({ userData }) => {
                               onClick={() => handleFilterClick(idx)}
                             />
                           )}
+                          {/* this should be refactored to use be a funxtion and uses switch case to display field depending on type */}
                           {showFilterMenu && activeFilterMenu === idx && (
                             <div ref={filterRef} className="filter-dropdown">
                               <SelectField
