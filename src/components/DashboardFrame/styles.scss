@@ -1,0 +1,53 @@
+@use "/src/theme";
+
+.dashboard-frame {
+  font-family: "Work Sans", sans-serif;
+  height: 100vh;
+
+  .body {
+    display: flex;
+    background-color: theme.$body-bg-color;
+
+    @media screen and (max-width: 1000px) {
+      flex-direction: row-reverse;
+    }
+
+    .mob-sidebar {
+      @media screen and (min-width: 750px) and (max-width: 1000px) {
+        position: fixed;
+        width: 40%;
+        display: block;
+        z-index: 10;
+      }
+
+      @media screen and (max-width: 750px) {
+        position: fixed;
+        width: 60%;
+        display: block;
+        z-index: 10;
+      }
+
+      .container {
+        display: none;
+
+        @media screen and (max-width: 1000px) {
+          display: block;
+          width: 100%;
+        }
+      }
+    }
+
+    .content {
+      padding: 60px;
+      width: 80%;
+      height: calc(100vh - 223px);
+      overflow: auto;
+
+      @media screen and (max-width: 1000px) {
+        width: 100%;
+        padding: 20px;
+        height: calc(100vh - 100px);
+      }
+    }
+  }
+}

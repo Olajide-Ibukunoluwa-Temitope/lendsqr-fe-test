@@ -16,6 +16,7 @@
   display: flex;
   font-family: "Avenir Next", sans-serif;
   background-color: theme.$white;
+
   .side-container {
     height: 100%;
     display: flex;
@@ -23,14 +24,25 @@
     justify-content: center;
     align-items: center;
   }
+
   .left-side {
     width: 55%;
+
+    @media screen and (max-width: 900px) {
+      display: none;
+    }
+
     .logo-container {
       position: absolute;
       top: 106px;
       left: 97px;
     }
+
+    .login-image {
+      margin-top: 10%;
+    }
   }
+
   .right-side {
     width: 45%;
     background: theme.$white;
@@ -40,8 +52,28 @@
     justify-content: flex-start;
     padding-left: 100px;
 
+    @media screen and (max-width: 900px) {
+      width: 100%;
+      padding: 0 40px;
+    }
+
     .right-side-content {
       width: 75%;
+
+      @media screen and (max-width: 900px) {
+        width: 100%;
+      }
+
+      .logo-container {
+        display: none;
+
+        @media screen and (max-width: 900px) {
+          display: block;
+          top: 100px;
+          position: absolute;
+        }
+      }
+
       .heading {
         font-size: 40px;
         font-weight: 700;
@@ -49,7 +81,9 @@
         color: theme.$pry-text-color;
         font-family: "Avenir Next Bold", sans-serif;
         margin: 0 0 10px;
+        letter-spacing: -0.04em;
       }
+
       .sub-text {
         font-family: "Avenir Next", sans-serif;
         font-weight: 400;
@@ -58,6 +92,7 @@
         color: theme.$sec-text-color;
         margin: 0;
       }
+
       .form-container {
         margin-top: 60px;
 
@@ -70,6 +105,7 @@
           text-transform: uppercase;
           color: theme.$sec-color;
           margin: 0 0 30px;
+          cursor: pointer;
         }
       }
     }

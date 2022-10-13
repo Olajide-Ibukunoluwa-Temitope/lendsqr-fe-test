@@ -7,4 +7,6 @@ export type TextFieldProps = {
   handleInputOptionClick?: (arg?: any) => void;
   inputOption?: boolean;
   showPassword?: boolean;
+  borderRadius?: string;
+  label?: string;
 };

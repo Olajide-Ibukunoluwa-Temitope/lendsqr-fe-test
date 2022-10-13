@@ -1,0 +1,18 @@
+@use "src/theme";
+
+.alt-btn {
+  background: theme.$white;
+  border-radius: 8px;
+  outline: none;
+  box-shadow: none;
+  width: 100%;
+  padding: 14px;
+  font-family: "Avenir Next Bold";
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 19px;
+  text-align: center;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  white-space: nowrap;
+}

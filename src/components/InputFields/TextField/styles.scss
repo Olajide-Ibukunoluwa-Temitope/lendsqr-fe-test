@@ -2,46 +2,63 @@
 
 .textfield-container {
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   width: 100%;
-  position: relative;
   margin-bottom: 24px;
 
-  .textfield {
-    height: 50px;
-    width: 100%;
-    font-family: "Avenir Next";
-    box-sizing: border-box;
-    background: theme.$white;
-    border: 2px solid rgba(84, 95, 125, 0.15);
-    border-radius: 5px;
-    padding: 16px;
-  }
-
-  input.textfield::placeholder {
-    font-family: "Avenir Next";
-    font-style: normal;
-    font-weight: 400;
+  .label {
+    font-weight: 500;
     font-size: 14px;
-    line-height: 19px;
-    color: theme.$sec-text-color;
-    opacity: 0.6;
+    line-height: 16px;
+    color: theme.$pry-text-color;
+    text-transform: capitalize;
+    margin-bottom: 6px;
   }
 
-  .input-option {
-    position: absolute;
-    right: 15px;
-    font-family: "Avenir Next Bold";
-    font-style: normal;
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 16px;
-    text-align: center;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    align-items: center;
+  .custom-container {
+    position: relative;
     display: flex;
-    height: 100%;
-    color: theme.$sec-color;
-    cursor: pointer;
+    width: 100%;
+    .textfield {
+      height: 50px;
+      width: 100%;
+      font-family: "Avenir Next";
+      box-sizing: border-box;
+      background: theme.$white;
+      border: 2px solid rgba(84, 95, 125, 0.15);
+      border-radius: 5px;
+      padding-left: 16px;
+      padding-right: 16px;
+      line-height: 19px;
+      outline: none;
+    }
+
+    input.textfield::placeholder {
+      font-family: "Avenir Next";
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 19px;
+      color: theme.$sec-text-color;
+      opacity: 0.6;
+    }
+
+    .input-option {
+      position: absolute;
+      right: 15px;
+      font-family: "Avenir Next Bold";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 16px;
+      text-align: center;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      align-items: center;
+      display: flex;
+      height: 100%;
+      color: theme.$sec-color;
+      cursor: pointer;
+    }
   }
 }

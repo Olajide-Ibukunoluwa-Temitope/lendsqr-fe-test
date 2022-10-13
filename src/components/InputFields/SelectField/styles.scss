@@ -1,0 +1,43 @@
+@use "src/theme";
+
+.selectfield-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 24px;
+
+  .label {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 16px;
+    color: theme.$pry-text-color;
+    text-transform: capitalize;
+    margin-bottom: 6px;
+  }
+
+  .custom-container {
+    position: relative;
+    display: flex;
+    width: 100%;
+    .select-input {
+      height: 50px;
+      width: 100%;
+      box-sizing: border-box;
+      font-family: "Work sans", sans-serif;
+      color: rgba(84, 95, 125, 0.8);
+      background: theme.$white;
+      border: 2px solid rgba(84, 95, 125, 0.15);
+      padding-left: 16px;
+      line-height: 19px;
+      background-image: url("../../../assets/icons/down_arrow_alt.svg");
+      background-repeat: no-repeat;
+      background-position: right 0.7rem top 50%;
+      background-size: 0.65rem auto;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+    }
+  }
+}

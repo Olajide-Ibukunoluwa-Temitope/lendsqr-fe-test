@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { inputData } from "./data";
 import { formDataType } from "./types";
 
 import TextField from "../../components/InputFields/TextField/TextField";
-import Button from "../../components/Buttons/Button";
+import Button from "../../components/Buttons/Button/Button";
 
 import logo from "../../assets/logo/lendsqr_logo.svg";
 import loginImg from "../../assets/images/login_img.svg";
@@ -18,6 +19,7 @@ const Login: React.FC = () => {
     password: "",
   });
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   // funtions
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -52,6 +54,11 @@ const Login: React.FC = () => {
     });
   };
 
+  const handleLogin = () => {
+    sessionStorage.setItem("isLoggedIn", "true");
+    navigate("/dashboard/customers/users");
+  };
+
   return (
     <div className="login">
       <div className="left-side side-container">
@@ -64,12 +71,15 @@ const Login: React.FC = () => {
       </div>
       <div className="right-side side-container">
         <div className="right-side-content">
+          <div className="logo-container">
+            <img src={logo} alt="logo" />
+          </div>
           <h3 className="heading">Welcome!</h3>
           <p className="sub-text">Enter details to login.</p>
           <div className="form-container">
             {displayInputFields()}
             <p className="forgot-password">forgot password?</p>
-            <Button />
+            <Button btnText="LOG IN" onClick={handleLogin} />
           </div>
         </div>
       </div>
