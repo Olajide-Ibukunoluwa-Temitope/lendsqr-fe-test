@@ -12,18 +12,11 @@ import TextField from "../InputFields/TextField/TextField";
 import SelectField from "../InputFields/SelectField/SelectField";
 import ButtonAlt from "../Buttons/ButtonAlt/ButtonAlt";
 import Button from "../Buttons/Button/Button";
-import { useNavigate } from "react-router-dom";
 import { TableProps } from "./types";
-import { sliceIntoChunks } from "../../utilities";
+import { parseDate, sliceIntoChunks } from "../../utilities";
 
 const Table: React.FC<TableProps> = ({ userData }) => {
   const [tableItemCount, setTableItemCount] = useState<number>(10);
-  const [tableItemData, setTableItemData] = useState<{
-    [key: string]: number;
-  }>({
-    initialIndex: 0,
-    lastIndex: 10,
-  });
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [showTableMenu, setShowTableMenu] = useState<boolean>(false);
   const [activeMenu, setActiveMenu] = useState<number>(0);
@@ -37,11 +30,10 @@ const Table: React.FC<TableProps> = ({ userData }) => {
   });
   const optMenuRef = useRef(null);
   const filterRef = useRef(null);
-  const navigate = useNavigate();
 
   const totalItems = userData.length;
   const pageCount = Math.ceil(totalItems / tableItemCount);
-  const data = userData;
+
   const pages = [...Array(pageCount)].map((_, idx) => idx + 1);
   const updatePages = pages.slice(
     pageNumberStep.initialStep,
@@ -137,7 +129,7 @@ const Table: React.FC<TableProps> = ({ userData }) => {
     };
   }, [optMenuRef, filterRef]);
 
-  if (!userData || userData.length == 0) {
+  if (!userData || userData.length === 0) {
     return <p>Loading...</p>;
   }
 
@@ -274,7 +266,9 @@ const Table: React.FC<TableProps> = ({ userData }) => {
                     "border-b"
                   } table-data-item-container`}
                 >
-                  <div className="table-data-item">{user.phoneNumber}</div>
+                  <div className="table-data-item">
+                    {user.profile.phoneNumber}
+                  </div>
                 </td>
                 <td
                   className={`${
@@ -282,7 +276,9 @@ const Table: React.FC<TableProps> = ({ userData }) => {
                     "border-b"
                   } table-data-item-container`}
                 >
-                  <div className="table-data-item">{user.createdAt}</div>
+                  <div className="table-data-item">
+                    {parseDate(user.createdAt)}
+                  </div>
                 </td>
                 <td
                   className={`${

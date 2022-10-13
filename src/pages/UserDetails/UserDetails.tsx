@@ -16,6 +16,131 @@ const UserDetails: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const userDetailsData = [
+    {
+      title: "Personal Information",
+      cols: 5,
+      content: [
+        {
+          title: "full Name",
+          value:
+            userDetails?.profile.firstName +
+            " " +
+            userDetails?.profile.lastName,
+        },
+        {
+          title: "Phone Number",
+          value: userDetails?.profile.phoneNumber,
+        },
+        {
+          title: "Email Address",
+          value: userDetails?.email,
+        },
+        {
+          title: "Bvn",
+          value: userDetails?.profile.bvn,
+        },
+        {
+          title: "Gender",
+          value: userDetails?.profile.gender,
+        },
+        {
+          title: "Marital status",
+          value: "Single",
+        },
+        {
+          title: "Children",
+          value: "None",
+        },
+        {
+          title: "Type of residence",
+          value: "Parent’s Apartment",
+        },
+      ],
+    },
+    {
+      title: "Education and Employment",
+      cols: 4,
+      content: [
+        {
+          title: "level of education",
+          value: userDetails?.education.level,
+        },
+        {
+          title: "employment status",
+          value: userDetails?.education.employmentStatus,
+        },
+        {
+          title: "sector of employment",
+          value: userDetails?.education.sector,
+        },
+        {
+          title: "Duration of employment",
+          value: userDetails?.education.duration,
+        },
+        {
+          title: "office email",
+          value: userDetails?.education.officeEmail,
+        },
+        {
+          title: "Monthly income",
+          value: `₦${
+            userDetails ? Math.min(...userDetails?.education.monthlyIncome) : ""
+          } - ₦${
+            userDetails ? Math.max(...userDetails?.education.monthlyIncome) : ""
+          }`,
+        },
+        {
+          title: "loan repayment",
+          value: `₦${userDetails?.education.loanRepayment}`,
+        },
+      ],
+    },
+    {
+      title: "Socials",
+      cols: 5,
+      content: [
+        {
+          title: "Twitter",
+          value: userDetails?.socials.twitter,
+        },
+        {
+          title: "Facebook",
+          value: userDetails?.socials.facebook,
+        },
+        {
+          title: "Instagram",
+          value: userDetails?.socials.instagram,
+        },
+      ],
+    },
+    {
+      title: "Guarantor",
+      cols: 5,
+      content: [
+        {
+          title: "full Name",
+          value:
+            userDetails?.guarantor.firstName +
+            " " +
+            userDetails?.guarantor.lastName,
+        },
+        {
+          title: "Phone Number",
+          value: userDetails?.guarantor.phoneNumber,
+        },
+        {
+          title: "Email Address",
+          value: "grace@gmail.com",
+        },
+        {
+          title: "Relationship",
+          value: "Sister",
+        },
+      ],
+    },
+  ];
+
   useEffect(() => {
     const isLoggedIn = sessionStorage.getItem("isLoggedIn");
     if (!isLoggedIn) return navigate("/");
@@ -30,7 +155,6 @@ const UserDetails: React.FC = () => {
     }
   }, [location.pathname, navigate, userDetails]);
 
-  console.log("userDetails", userDetails);
   return (
     <DashboardFrame>
       <div className="user-details">
@@ -68,7 +192,11 @@ const UserDetails: React.FC = () => {
                 className="avatar"
               />
               <div className="user-name">
-                <p className="name">Grace Effiom</p>
+                <p className="name">
+                  {userDetails?.profile.firstName +
+                    " " +
+                    userDetails?.profile.lastName}
+                </p>
                 <p className="sub-name-text">LSQFf587g90</p>
               </div>
             </div>
@@ -84,8 +212,10 @@ const UserDetails: React.FC = () => {
             </div>
             <div className="bank-summary-container">
               <div className="bank-summary">
-                <div className="loan">₦200,000.00</div>
-                <div className="bank">9912345678/Providus Bank</div>
+                <div className="loan">₦{userDetails?.accountBalance}</div>
+                <div className="bank">
+                  {userDetails?.accountNumber}/Providus Bank
+                </div>
               </div>
             </div>
           </div>
@@ -104,6 +234,34 @@ const UserDetails: React.FC = () => {
               );
             })}
           </div>
+        </div>
+        <div className="user-general-details">
+          {userDetailsData.map((value, idx) => {
+            return (
+              <div
+                className={`section-container ${
+                  idx !== userDetailsData.length - 1 && "separator"
+                }`}
+                key={idx}
+              >
+                <h4 className="section-title">{value.title}</h4>
+                <div
+                  className={`cols ${value.cols === 5 && "cols-5"} ${
+                    value.cols === 4 && "cols-4"
+                  }`}
+                >
+                  {value.content.map((content, index) => {
+                    return (
+                      <div key={index} className="detail-container">
+                        <p className="detail-title">{content.title}</p>
+                        <p className="detail">{content.value}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </DashboardFrame>

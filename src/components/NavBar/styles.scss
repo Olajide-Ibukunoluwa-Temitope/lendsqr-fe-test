@@ -5,6 +5,7 @@
   height: 100px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background: theme.$white;
   box-shadow: 3px 0px 20px rgba(0, 0, 0, 0.04);
 
@@ -17,12 +18,24 @@
     }
   }
 
+  .menu-icon {
+    display: none;
+    @media screen and (max-width: 1000px) {
+      display: block;
+      padding-right: 30px;
+    }
+  }
+
   .nav-items {
     display: flex;
     width: 80%;
     justify-content: space-between;
     align-items: center;
     padding: 0 66px 0 60px;
+
+    @media screen and (max-width: 1000px) {
+      display: none;
+    }
 
     .search-input-container {
       display: flex;

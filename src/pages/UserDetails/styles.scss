@@ -23,6 +23,12 @@
     align-items: center;
     margin-bottom: 40px;
 
+    @media screen and (max-width: 650px) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+
     h3 {
       margin: 0;
       font-style: normal;
@@ -36,6 +42,11 @@
       display: flex;
       align-items: center;
       gap: 20px;
+
+      @media screen and (max-width: 650px) {
+        flex-direction: column;
+        align-items: flex-start;
+      }
     }
   }
 
@@ -45,10 +56,17 @@
     box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
     border-radius: 4px;
     padding: 30px 30px 0 30px;
+    margin-bottom: 30px;
 
     .user-details-summary {
       display: flex;
       margin-bottom: 51px;
+
+      @media screen and (max-width: 650px) {
+        display: grid;
+        grid-column: 1fr;
+        gap: 20px;
+      }
 
       .avatar-container {
         display: flex;
@@ -56,6 +74,13 @@
         padding-right: 30px;
         border-right: solid 1px rgba(84, 95, 125, 0.2);
         gap: 20px;
+
+        @media screen and (max-width: 650px) {
+          border-right: none;
+          border-bottom: solid 1px rgba(84, 95, 125, 0.2);
+          padding-right: 0;
+          padding-bottom: 30px;
+        }
 
         .avatar {
           width: 100px;
@@ -93,6 +118,13 @@
         border-right: solid 1px rgba(84, 95, 125, 0.2);
         gap: 11px;
 
+        @media screen and (max-width: 650px) {
+          border-right: none;
+          border-bottom: solid 1px rgba(84, 95, 125, 0.2);
+          padding: 0 0 30px;
+          align-items: flex-start;
+        }
+
         &-text {
           font-weight: 500;
           font-size: 14px;
@@ -115,6 +147,12 @@
         padding-left: 30px;
         display: flex;
         align-items: center;
+
+        @media screen and (max-width: 650px) {
+          padding-left: 0;
+          border-bottom: solid 1px rgba(84, 95, 125, 0.2);
+          padding-bottom: 30px;
+        }
 
         .bank-summary {
           display: flex;
@@ -141,6 +179,11 @@
       display: flex;
       justify-content: space-between;
 
+      @media screen and (max-width: 750px) {
+        flex-wrap: wrap;
+        row-gap: 20px;
+      }
+
       .tab-item-container {
         padding: 0 20px 10px 20px;
 
@@ -166,6 +209,85 @@
       p {
         margin: 0;
       }
+    }
+  }
+
+  .user-general-details {
+    background: theme.$white;
+    border: 1px solid rgba(33, 63, 125, 0.06);
+    box-shadow: 3px 5px 20px rgba(0, 0, 0, 0.04);
+    border-radius: 4px;
+    padding: 30px;
+
+    h4 {
+      margin: 0;
+    }
+
+    .section-container {
+      .section-title {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 19px;
+        color: theme.$pry-text-color;
+        margin-bottom: 30px;
+      }
+
+      .cols {
+        display: grid;
+        row-gap: 30px;
+        column-gap: 20px;
+
+        &.cols-5 {
+          grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+          @media screen and (max-width: 750px) {
+            grid-template-columns: 1fr 1fr;
+          }
+
+          @media screen and (max-width: 500px) {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        &.cols-4 {
+          grid-template-columns: 1fr 1fr 1fr 1fr;
+
+          @media screen and (max-width: 750px) {
+            grid-template-columns: 1fr 1fr;
+          }
+
+          @media screen and (max-width: 500px) {
+            grid-template-columns: 1fr;
+          }
+        }
+
+        .detail-container {
+          p {
+            margin: 0;
+          }
+          .detail-title {
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 14px;
+            text-transform: uppercase;
+            color: theme.$sec-text-color;
+            margin-bottom: 8px;
+          }
+
+          .detail {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 19px;
+            color: theme.$sec-text-color;
+          }
+        }
+      }
+    }
+
+    .separator {
+      border-bottom: 1px solid rgba(33, 63, 125, 0.1);
+      padding-bottom: 28px;
+      margin-bottom: 30px;
     }
   }
 }

@@ -8,7 +8,6 @@ import "./styles.scss";
 import Table from "../../components/Table/Table";
 import DashboardFrame from "../../components/DashboardFrame/DashboardFrame";
 import { useNavigate } from "react-router-dom";
-import UserDetails from "../UserDetails/UserDetails";
 
 const Users: React.FC = () => {
   const [userData, setUserData] = useState<{ [key: string]: any }[]>([]);
@@ -53,7 +52,7 @@ const Users: React.FC = () => {
     const isLoggedIn = sessionStorage.getItem("isLoggedIn");
     if (!isLoggedIn) return navigate("/");
     fetchData();
-  }, []);
+  }, [navigate]);
 
   return (
     <DashboardFrame>

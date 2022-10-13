@@ -4,9 +4,11 @@ import search from "../../assets/icons/search.svg";
 import notification from "../../assets/icons/notification.png";
 import profile_img from "../../assets/images/profile_img.png";
 import down_arrow from "../../assets/icons/down_arrow.svg";
+import hamburger from "../../assets/icons/hamburger.png";
 import "./styles.scss";
+import { NavBarProps } from "./types";
 
-const NavBar: React.FC = () => {
+const NavBar: React.FC<NavBarProps> = ({ onClick }) => {
   return (
     <div className="nav">
       <div className="logo-container">
@@ -24,7 +26,7 @@ const NavBar: React.FC = () => {
           </div>
         </div>
         <div className="nav-options">
-          <a href="#" className="docs">
+          <a href={`${window.location.pathname}`} className="docs">
             Docs
           </a>
           <img src={notification} alt="notification" className="notification" />
@@ -34,6 +36,9 @@ const NavBar: React.FC = () => {
             <img src={down_arrow} alt="down arrow" />
           </div>
         </div>
+      </div>
+      <div className="menu-icon">
+        <img src={hamburger} alt="menu icon" width={27} onClick={onClick} />
       </div>
     </div>
   );

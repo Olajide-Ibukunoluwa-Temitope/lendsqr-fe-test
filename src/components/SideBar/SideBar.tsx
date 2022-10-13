@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import logout from "../../assets/icons/logout.svg";
 import switch_org from "../../assets/icons/switch_organization.svg";
 import down_arrow_alt from "../../assets/icons/down_arrow_alt.svg";
@@ -13,7 +13,9 @@ const SideBar: React.FC = () => {
 
   const handleLogout = () => {
     sessionStorage.removeItem("isLoggedIn");
-    navigate("/");
+    setTimeout(() => {
+      navigate("/");
+    }, 1000);
   };
 
   const displaySidebarData = useCallback(() => {
@@ -56,7 +58,7 @@ const SideBar: React.FC = () => {
         </div>
       );
     });
-  }, []);
+  }, [splitPath]);
 
   return (
     <div className="container">

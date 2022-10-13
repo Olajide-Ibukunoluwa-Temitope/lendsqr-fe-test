@@ -8,6 +8,7 @@
     border-radius: 4px;
     padding: 30px;
     margin-top: 40px;
+    overflow: auto;
 
     .table {
       width: 100%;
@@ -129,6 +130,11 @@
     align-items: center;
     justify-content: space-between;
     margin-top: 20px;
+
+    @media screen and (max-width: 750px) {
+      flex-direction: column;
+      gap: 20px;
+    }
 
     .table-list-count {
       display: flex;
